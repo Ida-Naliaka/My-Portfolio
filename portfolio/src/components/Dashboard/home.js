@@ -100,7 +100,6 @@ const Home = () => {
         <button type="submit">Submit</button>
         <button onClick={() => auth.signOut()}>Sign out</button>
       </form>
-      
     </div>
   );
 };
