@@ -6,9 +6,10 @@
 .pnp.js
 
 /portfolio/node_modules
+/server/node_modules
 # testing
 /coverage
-
+/portfolio/build
 # production
 # misc
 .env
