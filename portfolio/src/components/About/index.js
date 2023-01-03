@@ -44,7 +44,7 @@ const About = () => {
           <p align="CENTER">
             <a
               className="link"
-              href="https://www.keepandshare.com/doc4/132408/ida-wafula-resume-pdf-52k?da=y"
+              href="https://www.keepandshare.com/doc4/132417/ida-wafula-resume-pdf-52k?da=y"
             >
               View my Resume
             </a>
