@@ -24,7 +24,7 @@ app.use("/api/portfolio", portfolioRoute);
 const __dirname2 = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname2, "/portfolio/build")));
+  app.use(express.static(path.join(__dirname2, "../portfolio/build")));
 
   app.get("*", (req, res) =>
     res.sendFile(path.resolve(__dirname2, "portfolio", "build", "index.html"))
