@@ -1,0 +1,21 @@
+$purple: #200122;
+$red:  #6f0000;
+
+$list1: $purple, $red;
+
+$list2: $purple 0%,$purple 33%,$red 33%,$red 66%, $purple 66%, $purple 100%; 
+
+$list3: $purple 0%,$purple 10%,$red 25%,$red 39%,$purple 79%,$purple 100%; 
+
+$list4: $purple, $red, $purple, $red, $purple, $red, $purple, $red, $purple;
+
+@mixin gradient($direction, $list) { 
+    background: -webkit-linear-gradient($direction, $list);
+    background: -moz-linear-gradient($direction, $list);
+    background: -o-linear-gradient($direction, $list);
+    background: linear-gradient($direction, $list);  
+  }
+
+  .two {
+    @include gradient(right, $list1);
+  }
