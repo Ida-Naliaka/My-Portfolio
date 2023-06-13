@@ -45,7 +45,7 @@ If you have any questions, feel free to reach out to me at wafulaida@gmail.com.
   
 
 
-### [Idawafula Potfolio Demo](https://idawafula.onrender.com/)
+### [Idawafula Portfolio Demo](https://idawafula.onrender.com/)
 
 
 
