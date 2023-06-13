@@ -1,6 +1,5 @@
 import "./index.scss";
 import { useEffect, useState } from "react";
-import Loader from "react-loaders";
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import AnimatedLetters from "../AnimatedLetters";
@@ -94,7 +93,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <Loader type="pacman" />
     </>
   );
 };

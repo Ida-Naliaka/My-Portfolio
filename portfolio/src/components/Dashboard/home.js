@@ -1,8 +1,10 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { auth, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import axios from "axios";
+
 const Home = () => {
+  const [resume, setResume]= useState("");
   const savePortfolio = async (portfolio) => {
     try {
       await axios.post("/api/portfolio", portfolio).then((res) => {
@@ -17,6 +19,20 @@ const Home = () => {
   };
   const form = useRef();
 
+  const saveResume = async () => {
+    console.log(resume)
+    try {
+      await axios.post("/api/portfolio/resume", {url:resume}).then((res) => {
+        console.log(`${res.data._id}: resume has been added successfully`);
+        alert("resume has been added successfully");
+      });
+      window.location.reload(false);
+    } catch (error) {
+      console.log(error);
+      alert("Failed to add resume");
+    }
+  };
+  
   const submitPortfolio = async () => {
     const name = form.current[0]?.value;
     const description = form.current[1]?.value;
@@ -99,6 +115,13 @@ const Home = () => {
         </p>
         <button type="submit">Submit</button>
         <button onClick={() => auth.signOut()}>Sign out</button>
+      </form>
+
+      <form onSubmit={(e)=>{e.preventDefault(); saveResume()}}>
+      <p>
+          <input type="text" value={resume} onChange={(e)=>setResume(e.target.value)} placeholder="Resume url" />
+        </p>
+        <button type="submit">Submit Resume</button>
       </form>
     </div>
   );

@@ -9,17 +9,27 @@ import {
   faNodeJs,
   faPhp,
 } from "@fortawesome/free-brands-svg-icons";
-import Loader from "react-loaders";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 const About = () => {
   const [letterClass, setLetterClass] = useState("text-animate");
+  const [resume, setResume] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
       setLetterClass("text-animate-hover");
     }, 3000);
+    getResume();
   }, []);
+  const getResume= async() => {
+    await axios.get('/api/portfolio/resume').then((res)=>{
+      setResume(res.data[0].url)
+    }).catch((err)=>{
+      alert('resume could not be retrieved')
+      console.log(err)
+    })
+  }
 
   return (
     <>
@@ -43,8 +53,8 @@ const About = () => {
           </p>
           <p align="CENTER">
             <a
+              href={resume} target="_blank" rel="noreferrer"
               className="link"
-              href="https://pdfhost.io/v/FLoLWngTC_Ida_Wafula_Resume" target="_blank" rel="noreferrer"
             >
               View my Resume
             </a>
@@ -73,7 +83,6 @@ const About = () => {
           </div>
         </div>
       </div>
-      <Loader type="pacman" />
     </>
   );
 };

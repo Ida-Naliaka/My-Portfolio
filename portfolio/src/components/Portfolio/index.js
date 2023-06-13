@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Loader from "react-loaders";
 import AnimatedLetters from "../AnimatedLetters";
 import "./index.scss";
 import axios from "axios";
@@ -49,8 +48,6 @@ const Portfolio = () => {
         </h1>
         <div>{renderPortfolio(portfolio)}</div>
       </div>
-
-      <Loader type="pacman" />
     </>
   );
 };

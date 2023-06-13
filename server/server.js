@@ -2,22 +2,22 @@ const express = require("express");
 const mongoose = require("mongoose");
 const portfolioRoute = require("./portfolioRoute");
 const path = require("path");
-require('dotenv').config();
+require("dotenv").config();
 
 const app = express();
 app.use(express.json()); //accept json data
+
 const connectDB = async () => {
   try {
-    mongoose.set('strictQuery', false);
-    await mongoose.connect(process.env.URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+  const conn = await mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  console.log(`MongoDB Connected: ${conn.connection.host}`);
     
-    console.log("MongoDB Connected Successfully");
   } catch (error) {
     console.log(`Error: ${error.message}`);
-    process.exit();
+    process.exit(1);
   }
 };
 connectDB();
