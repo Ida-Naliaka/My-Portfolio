@@ -4,7 +4,7 @@
   "description": "portfolio backend",
   "main": "./server/server.js",
   "scripts": {
-    "install-server": "cd server && npm install",
+    "install-server": "cd server && npm install && cd portfolio && npm install && npm run build",
     "start-server": "cd server && node server.js",
     "install-client": "cd portfolio && npm install",
     "build-client": "cd portfolio && npm run build",
