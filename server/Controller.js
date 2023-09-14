@@ -2,7 +2,59 @@ require("dotenv").config();
 const expressAsyncHandler = require("express-async-handler");
 const Portfolio = require("./portfoliomodel");
 const Resume = require("./resumeModel");
+const User = require("./userModel");
+const bcrypt= require('bcryptjs')
 
+//register user
+const NewUser = async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password ) {
+    res.status(400);
+    throw new Error("Please fill in all the Fields");
+  } 
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    res.status(400);
+    throw new Error("User already exists");
+  }
+  try {
+    const user = await User.create({
+      email: email.toLowerCase(),
+      password: bcrypt.hashSync(password, 8),
+    });
+    if (user) {
+      res.status(201).json({
+        _id: user._id,
+        email: user.email,
+      });
+    } else {
+      throw new Error("Failed to create user");
+    }
+  } catch (error) {
+    console.log('signup', error);
+  }
+};
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(400);
+    throw new Error("Please fill in all the Fields");
+  }
+  try {
+    const user = await User.findOne({ email });
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.status(201).json({
+        _id: user._id,
+        email: user.email,
+      });
+    } else {
+    res.status(401);
+    throw new Error("Invalid Email or Password");
+  } 
+  } catch (error) {
+    console.log('login',error)
+  }
+};
 const NewProfile = expressAsyncHandler(async (req, res) => {
   const { name, description, url, image, sourcecode } = req.body;
   if (!name || !description || !url || !image || !sourcecode) {
@@ -67,4 +119,4 @@ const getResume = expressAsyncHandler(async (req, res) => {
     throw new Error(error.message);
   }
 });
-module.exports = { NewProfile, getPortfolio, NewResume, getResume };
+module.exports = { NewProfile, getPortfolio, NewResume, getResume, login, NewUser };

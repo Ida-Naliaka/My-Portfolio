@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const portfolioRoute = require("./portfolioRoute");
+const userRoute = require("./userRoute");
 const path = require("path");
 require("dotenv").config();
 
@@ -23,6 +24,7 @@ const connectDB = async () => {
 connectDB();
 
 app.use("/api/portfolio", portfolioRoute);
+app.use("/api/user", userRoute);
 //-------------------------deployment setup
 const __dirname2 = path.resolve();
 
